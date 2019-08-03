@@ -31,6 +31,6 @@ export class Page extends React.Component {
 Page.propTypes = {
   year: PropTypes.number.isRequired,
   photos: PropTypes.array.isRequired,
-  setYear: PropTypes.func.isRequired,
-  isFetching: PropTypes.bool.isRequired,
+  getPhotos: PropTypes.func.isRequired,
+  isFetching: PropTypes.bool.isRequired
 };
