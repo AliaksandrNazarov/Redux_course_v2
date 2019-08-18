@@ -22,6 +22,10 @@ function makeYearPhotos(photos, selectedYear) {
 }
 
 function getMorePhotos(offset, count, year, dispatch) {
+  dispatch({
+    type: GET_PHOTOS_REQUEST,
+    payload: year
+  });
   //eslint-disable-next-line no-undef
   VK.Api.call(
     "photos.getAll",
@@ -51,6 +55,25 @@ function getMorePhotos(offset, count, year, dispatch) {
   );
 }
 
-export const getPhotos = (offset, count, year) => dispatch => {
-  getMorePhotos(offset, count, year, dispatch);
-};
+// export const getPhotos = (offset, count, year) => dispatch => {
+//   getMorePhotos(offset, count, year, dispatch);
+// };
+
+export function getPhotos(year) {
+  return dispatch => {
+    dispatch({
+      type: GET_PHOTOS_REQUEST,
+      payload: year
+    });
+
+    if (cached) {
+      let photos = makeYearPhotos(photosArr, year);
+      dispatch({
+        type: GET_PHOTOS_SUCCESS,
+        payload: photos
+      });
+    } else {
+      getMorePhotos(0, 200, year, dispatch);
+    }
+  };
+}

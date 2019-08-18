@@ -36,8 +36,7 @@ class App extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getPhotosAction: (offset, count, year) =>
-      dispatch(getPhotos(offset, count, year)),
+    getPhotosAction: year => dispatch(getPhotos(year)),
     handleLoginAction: () => dispatch(handleLogin())
   };
 };

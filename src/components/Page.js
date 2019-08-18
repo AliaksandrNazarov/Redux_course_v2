@@ -1,10 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+const Button = ({ className, onClick, name }) => (
+  <button className={className} onClick={onClick}>
+    {name}
+  </button>
+);
+
+const years = [2014, 2015, 2016, 2017, 2018];
+
 export class Page extends React.Component {
   onBtnClick = e => {
     const year = +e.currentTarget.innerText;
-    this.props.getPhotos(0, 200, year);
+    this.props.getPhotos(year);
   };
 
   render() {
@@ -13,16 +21,23 @@ export class Page extends React.Component {
     return (
       <div>
         <div>
-          <button onClick={this.onBtnClick}>2018</button>
-          <button onClick={this.onBtnClick}>2017</button>
-          <button onClick={this.onBtnClick}>2016</button>
-          <button onClick={this.onBtnClick}>2015</button>
-          <button onClick={this.onBtnClick}>2014</button>
+          {years.map(year => (
+            <Button
+              className="btn"
+              key={year}
+              name={year}
+              onClick={this.onBtnClick}
+            />
+          ))}
         </div>
-        <p>
-          У тебя {photos.length} фото за {year} год
-        </p>
         {isFetching ? <p>Загрузка...</p> : <p>У тебя {photos.length} фото.</p>}
+        <div>
+          {!isFetching &&
+            photos.length &&
+            photos.map(photo => (
+              <img src={photo.sizes[0].url} alt="no_photo" key={photo.id} />
+            ))}
+        </div>
       </div>
     );
   }
