@@ -24,6 +24,7 @@ export class User extends Component {
     }
   };
   render() {
+    console.log("---------render User");
     return <div className="ib user">{this.renderTemplate()}</div>;
   }
 }

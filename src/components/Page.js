@@ -16,7 +16,7 @@ export class Page extends React.Component {
   };
 
   render() {
-    const { year, photos, isFetching, error } = this.props;
+    const { photos, isFetching, error } = this.props;
 
     return (
       <div>
