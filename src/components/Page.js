@@ -16,7 +16,7 @@ export class Page extends React.Component {
   };
 
   render() {
-    const { year, photos, isFetching } = this.props;
+    const { year, photos, isFetching, error } = this.props;
 
     return (
       <div>
@@ -30,6 +30,9 @@ export class Page extends React.Component {
             />
           ))}
         </div>
+        {error && (
+          <p className="error">Во время загрузки фото произошла ошибка</p>
+        )}
         {isFetching ? <p>Загрузка...</p> : <p>У тебя {photos.length} фото.</p>}
         <div>
           {!isFetching &&
@@ -47,5 +50,6 @@ Page.propTypes = {
   year: PropTypes.number.isRequired,
   photos: PropTypes.array.isRequired,
   getPhotos: PropTypes.func.isRequired,
-  isFetching: PropTypes.bool.isRequired
+  isFetching: PropTypes.bool.isRequired,
+  error: PropTypes.string
 };

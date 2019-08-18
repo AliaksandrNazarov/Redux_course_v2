@@ -8,7 +8,7 @@ import "./App.css";
 
 class App extends Component {
   render() {
-    const { year, photos, isFetching } = this.props.page;
+    const { year, photos, isFetching, error } = this.props.page;
     const { user, getPhotosAction, handleLoginAction } = this.props;
 
     return (
@@ -28,6 +28,7 @@ class App extends Component {
           year={year}
           getPhotos={getPhotosAction}
           isFetching={isFetching}
+          error={error}
         />
       </div>
     );
